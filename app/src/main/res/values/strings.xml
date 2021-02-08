@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Medical Book</string>
+    <string name="button_daily_record">Daily Medical Record</string>
+    <string name="button_yoga_instructor">Personal Yoga Instructor</string>
+    <string name="button_nearest_hospital">Nearest hospital</string>
+    <string name="button_bus_service">Bus to go to hospital</string>
+    <string name="button_news">Latest Medical News</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_timer_start">Start</string>
+    <string name="button_timer_stop">Stop</string>
+    <string name="button_timer_reset">Reset</string>
+
+
+</resources>
