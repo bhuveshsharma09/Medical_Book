@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/custom"
+    android:background="@drawable/background_gradient"
+
     tools:context=".MainActivity">
 
     <Button
@@ -29,4 +30,20 @@
         android:textSize="20dp"
         android:onClick="launchYogaInstructor"
         android:layout_below="@id/button_daily_record"/>
+
+
+
+
+    <Button
+        android:id="@+id/button_safe_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_centerHorizontal="true"
+        android:text="@string/button_safe_entry"
+        android:textSize="20dp"
+
+        android:onClick="launchSafeEntry"
+        android:layout_below="@id/button_yoga_instructor"/>
 </RelativeLayout>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bhuvesh.medicalbook">
-
+<uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalBook">
-        <activity android:name=".YogaDetailActivity"></activity>
+        <activity android:name=".SafeEntry"></activity>
+        <activity android:name=".EditRecord" />
+        <activity android:name=".YogaDetailActivity" />
         <activity android:name=".YogaInstructorActivity" />
         <activity android:name=".DialyMedicalRecordActivity" />
         <activity android:name=".MainActivity">
