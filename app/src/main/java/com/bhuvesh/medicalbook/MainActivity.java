@@ -103,4 +103,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void launchMap(View view) {
+        Intent intent = new Intent(this, NearByHospitals.class);
+        startActivity(intent);
+    }
+
+
+
+    public void launchFood(View view) {
+        Intent intent = new Intent(this, HealthyFood.class);
+        startActivity(intent);
+    }
 }

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "519734706299",
+    "project_id": "medicalbool",
+    "storage_bucket": "medicalbool.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:519734706299:android:b30276226a57e570ac62de",
+        "android_client_info": {
+          "package_name": "com.bhuvesh.medicalbook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "519734706299-9da7uq0nubg38a32bp9dfrqnh5m1hft3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bhuvesh.medicalbook",
+            "certificate_hash": "9cff0f62e4b186f97ed81e7bcfb020e138ddf2b2"
+          }
+        },
+        {
+          "client_id": "519734706299-odm8l5elgmh9jre503mpbv59gg2k1v66.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLLtag3zwYCrgnifa0wBv0Otn_KYHWMmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "519734706299-odm8l5elgmh9jre503mpbv59gg2k1v66.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

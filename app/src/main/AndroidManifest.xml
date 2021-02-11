@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bhuvesh.medicalbook">
-<uses-permission android:name="android.permission.CAMERA"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,12 +16,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalBook">
-        <activity android:name=".SafeEntry"></activity>
+        <activity android:name=".HealthyFood"></activity>
+        <activity android:name=".MedicalNews" />
+        <activity android:name=".NearByHospitals" />
+        <activity android:name=".SafeEntry" />
         <activity android:name=".EditRecord" />
         <activity android:name=".YogaDetailActivity" />
         <activity android:name=".YogaInstructorActivity" />
         <activity android:name=".DialyMedicalRecordActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".MainActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_map_key" />
+
+        <activity android:name=".ChooseLoginRegistrationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

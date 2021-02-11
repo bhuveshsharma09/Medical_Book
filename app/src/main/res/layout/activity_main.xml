@@ -46,4 +46,36 @@
 
         android:onClick="launchSafeEntry"
         android:layout_below="@id/button_yoga_instructor"/>
+
+
+    <Button
+        android:id="@+id/button_nearby_hospitals"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_centerHorizontal="true"
+        android:text="@string/button_nearest_hospital"
+        android:textSize="20dp"
+
+        android:onClick="launchMap"
+        android:layout_below="@id/button_safe_entry"/>
+
+
+    <Button
+        android:id="@+id/button_news"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_centerHorizontal="true"
+        android:text="@string/button_food"
+        android:textSize="20dp"
+
+
+        android:onClick="launchFood"
+        android:layout_below="@id/button_nearby_hospitals"/>
+
+
+
 </RelativeLayout>
