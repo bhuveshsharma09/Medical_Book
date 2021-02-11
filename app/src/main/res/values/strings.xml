@@ -4,13 +4,15 @@
     <string name="button_yoga_instructor">Personal Yoga Instructor</string>
     <string name="button_nearest_hospital">Nearest hospital</string>
     <string name="button_bus_service">Bus to go to hospital</string>
-    <string name="button_news">Latest Medical News</string>
+    <string name="button_food">Healthy Food Options</string>
     <string name="button_safe_entry">Safe Entry</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="button_timer_start">Start</string>
     <string name="button_timer_stop">Stop</string>
     <string name="button_timer_reset">Reset</string>
+    <string name="google_map_key">AIzaSyB91i6CosaSnE3AQWq-GLt109oDMLyzvPE</string>
+    <string name="button_food_roder">Order</string>
 
 
 </resources>
