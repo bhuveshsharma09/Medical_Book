@@ -1,6 +1,20 @@
 package com.bhuvesh.medicalbook;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
@@ -9,18 +23,9 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Toast;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class DialyMedicalRecordActivity extends AppCompatActivity {
 
@@ -31,10 +36,64 @@ public class DialyMedicalRecordActivity extends AppCompatActivity {
     RecordAdapter recordAdapter;
 
 
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Log.d("ID number", String.valueOf(item.getItemId()));
+
+        int itemId = 0;
+        itemId = item.getItemId();
+
+        if (itemId == R.id.dashboard)
+        {
+            Log.d("ID number", String.valueOf("at home"));
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+            return true;
+
+
+
+
+        }
+        else
+        {
+            Log.d("ID number", String.valueOf("at set"));
+            return true;
+        }
+
+
+
+
+
+        //return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialy_medical_record);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+
 
         imageButton = findViewById(R.id.image_add_record);
 
@@ -132,6 +191,20 @@ public class DialyMedicalRecordActivity extends AppCompatActivity {
         View view1 = layoutInflater.inflate(R.layout.record_input,null,false);
 
         EditText record_title = (EditText) view1.findViewById(R.id.dialog_record_title);
+
+
+
+
+
+        String date = new SimpleDateFormat("dd-MM-yyy").format(new Date());
+        // Date currentTime = Calendar.getInstance().getTime();
+        Log.d("date", String.valueOf(date));
+
+        record_title.setText("Date:"+date);
+
+
+
+
         EditText record_des = (EditText) view1.findViewById(R.id.dialog_record_description);
 
 

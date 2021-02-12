@@ -1,13 +1,76 @@
 package com.bhuvesh.medicalbook;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-
 public class YogaInstructorActivity extends AppCompatActivity implements FragmentYogaList.YogaListListener {
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Log.d("ID number", String.valueOf(item.getItemId()));
+
+        int itemId = 0;
+        itemId = item.getItemId();
+
+        if (itemId == R.id.dashboard)
+        {
+            Log.d("ID number", String.valueOf("at home"));
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+            return true;
+
+
+
+
+        }
+        else
+        {
+            Log.d("ID number", String.valueOf("at set"));
+            return true;
+        }
+
+
+
+
+
+        //return super.onOptionsItemSelected(item);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

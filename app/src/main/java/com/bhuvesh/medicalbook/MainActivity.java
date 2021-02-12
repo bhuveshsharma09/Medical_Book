@@ -1,22 +1,90 @@
 package com.bhuvesh.medicalbook;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
 
     Button dailyMedicalRecord, yogaInstructor, safeEntry;
 
+    // initialise sensor - accelerometer
+    // initialise variables for shake detection
+    private SensorManager mSensorManager;
+    private float mAccel;
+    private float mAccelCurrent;
+    private float mAccelLast;
+    
+
+
+
+
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Log.d("ID number", String.valueOf(item.getItemId()));
+
+        int itemId = 0;
+        itemId = item.getItemId();
+
+        if (itemId == R.id.dashboard)
+        {
+            Log.d("ID number", String.valueOf("at home"));
+
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+
+            return true;
+
+
+
+
+        }
+        else
+        {
+            Log.d("ID number", String.valueOf("at set"));
+            return true;
+        }
+
+
+
+
+
+        //return super.onOptionsItemSelected(item);
+    }
 
     // TODO: Change names
     public static final int CAMERA_REQUEST_PERMISSION = 1;
@@ -31,6 +99,21 @@ public class MainActivity extends AppCompatActivity {
         yogaInstructor = (Button) findViewById(R.id.button_yoga_instructor);
         safeEntry = (Button) findViewById(R.id.button_safe_entry);
 
+        String date = new SimpleDateFormat("dd-MM-yyy").format(new Date());
+       // Date currentTime = Calendar.getInstance().getTime();
+        Log.d("date", String.valueOf(date));
+
+
+
+        //sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        Objects.requireNonNull(mSensorManager).registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+        mAccel = 10f;
+        mAccelCurrent = SensorManager.GRAVITY_EARTH;
+        mAccelLast = SensorManager.GRAVITY_EARTH;
+
+
 
         safeEntry.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +124,30 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    private final SensorEventListener mSensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            float x = event.values[0];
+            float y = event.values[1];
+            float z = event.values[2];
+            mAccelLast = mAccelCurrent;
+            mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
+            float delta = mAccelCurrent - mAccelLast;
+            mAccel = mAccel * 0.9f + delta;
+            if (mAccel > 12) {
+                Context context = getApplicationContext();
+                Toast.makeText(getApplicationContext(), "Shake event detected", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, NearByHospitals.class);
+                startActivity(intent);
+            }
+        }
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+    };
+
+
 
     private void startScanningActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
@@ -64,6 +171,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
 
 
 
@@ -114,5 +224,17 @@ public class MainActivity extends AppCompatActivity {
     public void launchFood(View view) {
         Intent intent = new Intent(this, HealthyFood.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onResume() {
+        mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+        super.onResume();
+    }
+    @Override
+    protected void onPause() {
+        mSensorManager.unregisterListener(mSensorListener);
+        super.onPause();
     }
 }
