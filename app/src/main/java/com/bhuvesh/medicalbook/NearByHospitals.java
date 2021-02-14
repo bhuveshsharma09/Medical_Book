@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,70 +40,42 @@ import java.util.HashMap;
 import java.util.List;
 
 public class NearByHospitals extends AppCompatActivity {
-
+    /*
+    * This activity will open a google maps
+    * at user's current location
+    * and will locate all the nearby hospitals.
+    * */
 
     // Create variables for Google maps
     SupportMapFragment supportMapFragment;
-    GoogleMap map;
+    GoogleMap googleMap;
     FusedLocationProviderClient fusedLocationProviderClient;
     double presentLat = 0;
     double presentLong = 0;
-    Button searchbutton;
-    String place = "hospital";
+    Button searchButton;
+    public static final int REQUEST_CODE = 44;
 
 
-
-
+    // add the home button on action bar for better navigation experinece
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
-
         return super.onCreateOptionsMenu(menu);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Log.d("ID number", String.valueOf(item.getItemId()));
-
         int itemId = 0;
         itemId = item.getItemId();
-
         if (itemId == R.id.dashboard)
-        {
-            Log.d("ID number", String.valueOf("at home"));
-
-            Intent intent = new Intent(this, MainActivity.class);
+        {   Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-
-            return true;
-
-
-
-
-        }
+            return true;        }
         else
         {
-            Log.d("ID number", String.valueOf("at set"));
             return true;
         }
-
-
-
-
-
-        //return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,70 +87,46 @@ public class NearByHospitals extends AppCompatActivity {
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragment_nearby_hospital);
 
-        searchbutton = (Button) findViewById(R.id.button_get_nearby_hospitals);
+        searchButton = (Button) findViewById(R.id.button_get_nearby_hospitals);
 
 
         // create a variable for the place type which we are going to search
         // for this project, the place will be "Hospital"
-
-
         // Initialise the fused location provider
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
         // Check for the device permissions
-
         if (ActivityCompat.checkSelfPermission(NearByHospitals.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             // if the device grants permission for location this section will be called
-
             getPresentLocation();
-
-
         } else {
             ActivityCompat.requestPermissions(NearByHospitals.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
-
-
             //if permission denied
             // request for permission
-
-
         }
 
-        searchbutton.setOnClickListener(new View.OnClickListener() {
+        //
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchbutton.setText("lul");
+                // call the API and put in the value for placeholders
+                // the sturcture of API has been studied from
+                // https://blog.postman.com/what-is-api-request/
+                // Author Vineet Antil, website www.postman.com
                 String urlForHospital = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
                         + "?location=" + presentLat + "," + presentLong +
                         "&radius=5000" +
                         "&type=hospital"+
                         "&sensor=true" +
                         "&key=" + getResources().getString(R.string.google_map_key);
-
-
-                Log.d("URL", String.valueOf(urlForHospital));
-                Log.d("lat", String.valueOf(presentLat));
-                Log.d("lng", String.valueOf(presentLong));
-
-
-
-                new PlaceTask().execute(urlForHospital);
-
-
+                new Place().execute(urlForHospital);
             }
         });
-
-
     }
 
     private void getPresentLocation() {
-
-
-
-
-
-
         @SuppressLint("MissingPermission") Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
@@ -189,34 +136,26 @@ public class NearByHospitals extends AppCompatActivity {
                     // get lat and long coordinates
                     presentLat = location.getLatitude();
                     presentLong = location.getLongitude();
-
-                    Log.d("lat", String.valueOf(presentLat));
-                    Log.d("lng", String.valueOf(presentLong));
-
+                    //Log.d("lat", String.valueOf(presentLat));
+                   // Log.d("lng", String.valueOf(presentLong));
 
                     // callback method to put the co-ordinates on the map to display
                     supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                         @Override
                         public void onMapReady(GoogleMap googleMap) {
-                            map = googleMap;
-
-                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(presentLat,presentLong), 10));
-
-
-
+                            NearByHospitals.this.googleMap = googleMap;
+                            NearByHospitals.this.googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(presentLat,presentLong), 10));
                         }
                     });
                 }
             }
         });
-
-
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 44){
+        if (requestCode == REQUEST_CODE){
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
             {
                 getPresentLocation();
@@ -224,44 +163,33 @@ public class NearByHospitals extends AppCompatActivity {
         }
     }
 
-    private class PlaceTask extends AsyncTask<String, Integer,String>{
+    private class Place extends AsyncTask<String, Integer,String>{
+        // this piece of code helps to get data from URL
         @Override
         protected String doInBackground(String... strings) {
             String data = null;
             try {
-
-                Log.d("in place text", String.valueOf(strings[0]));
-
-                data = downloadURL(strings[0]);
+                //Log.d("in place text", String.valueOf(strings[0]));
+                data = download(strings[0]);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-
             return data;
-
-
         }
 
 
         @Override
         protected void onPostExecute(String s) {
-
             // do the parsing of data
-            new ParserTask().execute(s);
-
-
-
+            new ParserTheData().execute(s);
         }
 
-        private String downloadURL(String string) throws IOException {
-
-             URL url = new URL(string);
-
-            Log.d("im url in downaliod", String.valueOf(url));
+        private String download(String string) throws IOException {
+            // download the data for API response
+            URL url = new URL(string);
+            //Log.d("im url in downaliod", String.valueOf(url));
 
             HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-
             httpURLConnection.connect();
 
             InputStream stream = httpURLConnection.getInputStream();
@@ -271,80 +199,54 @@ public class NearByHospitals extends AppCompatActivity {
             String tempString = "";
 
             while((tempString = bufferedReader.readLine()) != null)
-
             {
-
                 stringBuilder.append(tempString);
-
-
-
-
             }
-
 
             String data = stringBuilder.toString();
             bufferedReader.close();
-
-            Log.d("api data", String.valueOf(data));
+            //Log.d("api data", String.valueOf(data));
             return data;
-
         }
     }
 
-    private class ParserTask extends  AsyncTask<String, Integer, List<HashMap<String, String>>>
+    private class ParserTheData extends  AsyncTask<String, Integer, List<HashMap<String, String>>>
     {
-
-
         @Override
         protected List<HashMap<String, String>> doInBackground(String... strings) {
-
+            // Parse the API reponse data into a map list
             JsonParser jsonParser = new JsonParser();
-
             List<HashMap<String,String>> mapList = null;
             JSONObject object = null;
             try {
                  object = new JSONObject(strings[0]);
-
                  mapList = jsonParser.parseResult(object);
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            Log.d("map data", String.valueOf(mapList));
+            //Log.d("map data", String.valueOf(mapList));
             return mapList;
-
         }
 
         @Override
         protected void onPostExecute(List<HashMap<String, String>> hashMaps) {
-            map.clear();
+            // final step is to put map list data on google map
+            // by using markers
 
+            googleMap.clear();
             for (int i = 0; i<hashMaps.size();i++)
             {
                 HashMap<String ,String> hashMapList = hashMaps.get(i);
-
                 double lat = Double.parseDouble(hashMapList.get("lat"));
                 double lng = Double.parseDouble(hashMapList.get("lng"));
                 String name = hashMapList.get("name");
 
                 LatLng latLng = new LatLng(lat,lng);
-
                 MarkerOptions options = new MarkerOptions();
-
                 options.position(latLng);
-
                 options.title(name);
-
-                map.addMarker(options);
-
-
-
-
-
-
-
-
+                googleMap.addMarker(options);
             }
 
         }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationActivity"
+    tools:context=".SignUpActivity"
     android:orientation="vertical">
 
 
@@ -24,8 +24,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/register"/>
+        android:text="Sign Up"
+        android:id="@+id/signup"/>
 
 
 

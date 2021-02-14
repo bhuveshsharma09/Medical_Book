@@ -1,6 +1,8 @@
 package com.bhuvesh.medicalbook;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,9 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
     ArrayList<Record> records;
     Context context;
     static ItemClicked itemClicked;
+    //TODO chnage
+    ViewGroup parent;
+    private int lastSelectedPosition = -1;
 
 
 
@@ -28,21 +33,26 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
         this.itemClicked = itemClicked;
     }
 
-    public RecordAdapter(ArrayList<Record> records, DialyMedicalRecordActivity dialyMedicalRecordActivity) {
-    }
+
 
 
     @NonNull
     @Override
-    public RecordAdapter.RecordHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public RecordHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.record_holder,parent,false);
+        this.parent = parent;
         return new RecordHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecordAdapter.RecordHolder holder, int position) {
-        holder.recordTitle.setText(records.get(position).getTitle());
-        holder.recordDescription.setText(records.get(position).getDescription());
+        if (position == lastSelectedPosition){
+            holder.recordTitle.setTextColor(Color.parseColor("#000000"));
+        }else {
+            holder.recordTitle.setTextColor(Color.parseColor("#FFFFFF"));
+        }
+        holder.recordTitle.setText(records.get(position).getRecordTitle());
+        holder.recordDescription.setText(records.get(position).getRecordDescription());
 
     }
 
@@ -51,7 +61,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
         return records.size();
     }
 
-    public static class RecordHolder extends RecyclerView.ViewHolder {
+    class RecordHolder extends RecyclerView.ViewHolder {
         TextView recordTitle, recordDescription;
         ImageView editImage;
         public RecordHolder(@NonNull View itemView) {
@@ -60,13 +70,21 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
             recordDescription = itemView.findViewById(R.id.record_description);
             editImage = itemView.findViewById(R.id.edit_clipart);
 
-          //  itemView.setOnClickListener(new View.OnClickListener() {
-        //        @Override
-         //       public void onClick(View v) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    recordTitle.setTextColor(Color.parseColor("#000000"));
+                    lastSelectedPosition = getAdapterPosition();
 
-          //      }
-          //  });
-
+                    if (recordDescription.getMaxLines() == 1){
+                        recordDescription.setMaxLines(Integer.MAX_VALUE);
+                    }else {
+                        recordDescription.setMaxLines(1);
+                    }
+                    notifyDataSetChanged();
+                    TransitionManager.beginDelayedTransition(parent);
+                }
+            });
 
 
 

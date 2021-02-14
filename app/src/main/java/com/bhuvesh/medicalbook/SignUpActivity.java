@@ -16,25 +16,22 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class LoginActivity extends AppCompatActivity {
-
+public class SignUpActivity extends AppCompatActivity {
     // declare all the objects
-    private Button loginButton;
+    private Button signUpButton;
     private EditText emailInput, passwordInput;
 
     // declare firebase objects to be used for authentication purpose
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener firebaseAuthStateListener;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
 
-        // link objects with correct view element
-        loginButton = (Button) findViewById(R.id.login);
+        // link all the objects with correct elements
+        signUpButton = (Button) findViewById(R.id.signup);
         emailInput = (EditText) findViewById(R.id.email);
         passwordInput = (EditText) findViewById(R.id.password);
 
@@ -43,36 +40,35 @@ public class LoginActivity extends AppCompatActivity {
         // where user can login and sign-up using email and password
         firebaseAuth = FirebaseAuth.getInstance();
 
-        // the function called when login button is clicked
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        // the function called when sign up button is clicked
+        signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // get the value of email and password editText fields
                 final String email = emailInput.getText().toString();
                 final String password = passwordInput.getText().toString();
 
                 // check if user has input email and password values or not
-                if(email.matches("") || password.matches("")) {
-                    Toast.makeText(LoginActivity.this, "Please check email and password", Toast.LENGTH_LONG).show();
-
-                }
-                else
+                if(email.matches("") || password.matches(""))
                 {
+                    Toast.makeText(SignUpActivity.this, "Please check email and password", Toast.LENGTH_LONG).show();
+                }
+                else {
                     // if user has input email and password values
-                    // we are ready to login the user
-                    // following code helps to login the user
-                    firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener
-                            (LoginActivity.this, new OnCompleteListener<AuthResult>()
-                            {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (!task.isSuccessful()) {
-                                        Toast.makeText(LoginActivity.this, "Login error!", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, "Login done!", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                    // we are ready to make an account of firebase
+                    // following code helps to create a new account for email given by user
+                    firebaseAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener
+                            (SignUpActivity.this,new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if(!task.isSuccessful()){
+                                                Toast.makeText(SignUpActivity.this, "Sign up error", Toast.LENGTH_SHORT).show();
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(SignUpActivity.this, "Sign up done!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
                 }
             }
         });
@@ -84,16 +80,15 @@ public class LoginActivity extends AppCompatActivity {
         firebaseAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                if (firebaseUser !=null){
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user !=null){
+                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                     return;
                 }
             }
         };
-
     }
 
     // to get firebase user state at onStart of activity.
@@ -103,6 +98,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(firebaseAuthStateListener);
+
     }
 
     // to save the firebase auth on Stop so that the state can be called

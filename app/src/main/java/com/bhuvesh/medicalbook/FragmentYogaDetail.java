@@ -1,20 +1,23 @@
 package com.bhuvesh.medicalbook;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 
 public class FragmentYogaDetail extends Fragment {
+    /*
+    this fragment will have the details of yoga.
+    * */
 
+    // declare the variables
     private long yogaId;
 
     // to prevent yogaId reset when device screen rotates
@@ -33,14 +36,7 @@ public class FragmentYogaDetail extends Fragment {
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             fragmentTransaction.commit();
         }
-
-
-
-
-
     }
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +44,6 @@ public class FragmentYogaDetail extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_yoga_detail, container, false);
     }
-
 
     @Override
     public void onStart() {
@@ -67,16 +62,11 @@ public class FragmentYogaDetail extends Fragment {
 
     public void setYogaId(long Id) {
         this.yogaId = Id;
-
     }
-
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putLong("yogaId", yogaId);
     }
-
-
-
 }

@@ -28,14 +28,14 @@
             android:label="Yoga Instructor"/>
 
         <activity android:name=".LoginActivity" />
-        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_key" />
 
-        <activity android:name=".ChooseLoginRegistrationActivity">
+        <activity android:name=".SelectLoginSignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -11,7 +11,6 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,99 +21,78 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity  {
+    /*
+    * This is the main activity and dashboard screen of the application.
+    * this screen helps user to navigate to various services which the application has to offer.
+    *
+    * Author: Bhuvesh Kumar
+    * */
 
+    // Initialise all the variables
     Button dailyMedicalRecord, yogaInstructor, safeEntry;
 
     // initialise sensor - accelerometer
     // initialise variables for shake detection
-    private SensorManager mSensorManager;
-    private float mAccel;
-    private float mAccelCurrent;
-    private float mAccelLast;
-    
+    private SensorManager sensorManager;
+    private float thresholdValue, accelerometerCurrentValue, accelerometerLastValue;
 
+    // fixed values for camera permissions
+    public static final int REQUEST_CAMERA_PERMISSION = 1;
+    public static final int REQUEST_CODE_SCANNING = 2;
 
-
-
-
-
-
+    // the following code creates a menu on action bar.
+    // it helps the user to navigate to home page.
+    // it servers a a shortcut.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
-
         return super.onCreateOptionsMenu(menu);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        Log.d("ID number", String.valueOf(item.getItemId()));
-
+        //Log.d("ID number", String.valueOf(item.getItemId()));
         int itemId = 0;
         itemId = item.getItemId();
-
         if (itemId == R.id.dashboard)
-        {
-            Log.d("ID number", String.valueOf("at home"));
-
+        {  //Log.d("ID number", String.valueOf("at home"));
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-
-            return true;
-
-
-
-
-        }
+            return true;        }
         else
-        {
-            Log.d("ID number", String.valueOf("at set"));
-            return true;
-        }
-
-
-
-
-
-        //return super.onOptionsItemSelected(item);
+        {//Log.d("ID number", String.valueOf("at set"));
+            return true; }
     }
 
-    // TODO: Change names
-    public static final int CAMERA_REQUEST_PERMISSION = 1;
-    public static final int SCANNING_REQUEST_CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // connect the objects to the correct view elements
         dailyMedicalRecord = (Button) findViewById(R.id.button_daily_record);
         yogaInstructor = (Button) findViewById(R.id.button_yoga_instructor);
         safeEntry = (Button) findViewById(R.id.button_safe_entry);
 
-        String date = new SimpleDateFormat("dd-MM-yyy").format(new Date());
-       // Date currentTime = Calendar.getInstance().getTime();
-        Log.d("date", String.valueOf(date));
-
-
-
-        //sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        Objects.requireNonNull(mSensorManager).registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+        // start sensor service to get values from accelerometer.
+        // accelerometer is a sensor used to detect the shake on mobile device.
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        Objects.requireNonNull(sensorManager).registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
-        mAccel = 10f;
-        mAccelCurrent = SensorManager.GRAVITY_EARTH;
-        mAccelLast = SensorManager.GRAVITY_EARTH;
+
+        // can change this value to change the sensitivity
+        thresholdValue = 5f;
+
+        accelerometerCurrentValue = SensorManager.GRAVITY_EARTH;
+        accelerometerLastValue = SensorManager.GRAVITY_EARTH;
 
 
-
+        // when the safe entry button is clicked.
+        // the new activity will be called using following code.
         safeEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,82 +100,72 @@ public class MainActivity extends AppCompatActivity  {
                 startScanningActivity();
             }
         });
-
     }
 
-    private final SensorEventListener mSensorListener = new SensorEventListener() {
+    //
+    private final SensorEventListener sensorEventListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            float x = event.values[0];
-            float y = event.values[1];
-            float z = event.values[2];
-            mAccelLast = mAccelCurrent;
-            mAccelCurrent = (float) Math.sqrt((double) (x * x + y * y + z * z));
-            float delta = mAccelCurrent - mAccelLast;
-            mAccel = mAccel * 0.9f + delta;
-            if (mAccel > 12) {
+            float xValue = event.values[0];
+            float yValue = event.values[1];
+            float zValue = event.values[2];
+            accelerometerLastValue = accelerometerCurrentValue;
+            accelerometerCurrentValue = (float) Math.sqrt((double) (xValue * xValue + yValue * yValue + zValue * zValue));
+            float delta = accelerometerCurrentValue - accelerometerLastValue;
+
+            if (delta > thresholdValue) {
                 Context context = getApplicationContext();
-                Toast.makeText(getApplicationContext(), "Shake event detected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Shaking", Toast.LENGTH_SHORT).show();
+                // open nearby hospital activity on shake detection
                 Intent intent = new Intent(MainActivity.this, NearByHospitals.class);
                 startActivity(intent);
             }
         }
+
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
     };
 
-
-
     private void startScanningActivity() {
+        // ask for camera permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-                //ask for the permision
-                requestPermissions(new String[] {Manifest.permission.CAMERA},CAMERA_REQUEST_PERMISSION);
+                requestPermissions(new String[] {Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
             }else {
                 //start scanning
-                startActivityForResult(new Intent(MainActivity.this,SafeEntry.class),SCANNING_REQUEST_CODE);
+                startActivityForResult(new Intent(MainActivity.this,SafeEntry.class), REQUEST_CODE_SCANNING);
             }
         }else {
             //start scanning
-            startActivityForResult(new Intent(MainActivity.this,SafeEntry.class),SCANNING_REQUEST_CODE);
+            startActivityForResult(new Intent(MainActivity.this,SafeEntry.class), REQUEST_CODE_SCANNING);
         }
     }
 
     public void launchDailyNotes(View view) {
-
+        // this function will start the Daily note activity
         Intent intent = new Intent(this, DialyMedicalRecordActivity.class);
         startActivity(intent);
-
-
     }
 
-
-
-
-
-
-
     public void launchYogaInstructor(View view) {
+        // this function will start the Yoga activity
         Intent intent = new Intent(this, YogaInstructorActivity.class);
         startActivity(intent);
     }
 
     public void launchSafeEntry(View view) {
+        // this function will start the Safe entry (QR scanning)
         Intent intent = new Intent(this, SafeEntry.class);
         startActivity(intent);
     }
 
-
-
-
-    // TODO: modify
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == CAMERA_REQUEST_PERMISSION){
+        if (requestCode == REQUEST_CAMERA_PERMISSION){
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                startActivityForResult(new Intent(MainActivity.this,SafeEntry.class),SCANNING_REQUEST_CODE);
+                startActivityForResult(new Intent(MainActivity.this,SafeEntry.class), REQUEST_CODE_SCANNING);
             }
         }
     }
@@ -205,7 +173,7 @@ public class MainActivity extends AppCompatActivity  {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == SCANNING_REQUEST_CODE){
+        if(requestCode == REQUEST_CODE_SCANNING){
             if (resultCode == RESULT_OK){
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(data.getStringExtra("scanning_result")));
                 startActivity(browserIntent);
@@ -215,12 +183,12 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     public void launchMap(View view) {
+        // this function will start the nearby hospital activity
         Intent intent = new Intent(this, NearByHospitals.class);
         startActivity(intent);
     }
 
-
-
+    // TODO: delete the function
     public void launchFood(View view) {
         Intent intent = new Intent(this, HealthyFood.class);
         startActivity(intent);
@@ -228,13 +196,13 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onResume() {
-        mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+        sensorManager.registerListener(sensorEventListener, sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
                 SensorManager.SENSOR_DELAY_NORMAL);
         super.onResume();
     }
     @Override
     protected void onPause() {
-        mSensorManager.unregisterListener(mSensorListener);
+        sensorManager.unregisterListener(sensorEventListener);
         super.onPause();
     }
 }
