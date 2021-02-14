@@ -13,6 +13,7 @@
     <string name="button_timer_reset">Reset</string>
     <string name="google_map_key">AIzaSyB91i6CosaSnE3AQWq-GLt109oDMLyzvPE</string>
     <string name="button_food_roder">Order</string>
+    <string name="action_bar_logout">Logout</string>
 
 
 </resources>

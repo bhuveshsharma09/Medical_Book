@@ -7,19 +7,31 @@
     tools:context=".FragmentTimer">
 
 <TextView
-android:id="@+id/time_view"
+android:id="@+id/time_display"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:layout_gravity="center_horizontal"
     android:layout_marginTop="@dimen/margin_top"
 android:textAppearance="@android:style/TextAppearance.Large"
-android:textSize="90sp"
+
+android:textSize="80sp"
     />
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content">
 <Button
 android:id="@+id/start_button"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
+    android:background="@drawable/timer_start"
 android:layout_gravity="center_horizontal"
+
+    android:layout_marginRight="@dimen/margin_left"
 android:layout_marginTop="20dp"
 android:text="@string/button_timer_start"
     />
@@ -28,7 +40,9 @@ android:id="@+id/stop_button"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:layout_gravity="center_horizontal"
+    android:background="@drawable/timer_start"
 android:layout_marginTop="8dp"
+    android:layout_marginRight="@dimen/margin_left"
 android:text="@string/button_timer_stop"
     />
 <Button
@@ -36,9 +50,13 @@ android:id="@+id/reset_button"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 android:layout_gravity="center_horizontal"
+    android:background="@drawable/timer_start"
 android:layout_marginTop="8dp"
 android:text="@string/button_timer_reset"
     />
+
+
+</LinearLayout>
     </LinearLayout>
 
 

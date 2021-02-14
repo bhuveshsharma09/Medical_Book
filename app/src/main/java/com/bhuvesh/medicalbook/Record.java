@@ -1,40 +1,55 @@
 package com.bhuvesh.medicalbook;
 
 public class Record {
-    private int id;
-    private String title;
-    private String description;
+    /*Record class contains data related to medical records.
+    Each record will have Id, record title and description
+    * */
 
-    public Record(String title, String description) {
-        this.title = title;
-        this.description = description;
+
+    // declare variables to be used in class
+    private int id;
+    private String recordTitle;
+    private String recordDescription;
+
+    // Initialising the constructor
+    public Record(String recordTitle, String recordDescription) {
+        this.recordTitle = recordTitle;
+        this.recordDescription = recordDescription;
     }
 
+    // another constructor
     public Record() {
 
     }
 
-    public int getId() {
+    // getter and setter methods to interact with Record class
+    public int getId()
+    {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id)
+    {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getRecordTitle()
+    {
+        return recordTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setRecordTitle(String recordTitle)
+    {
+        this.recordTitle = recordTitle;
     }
 
-    public String getDescription() {
-        return description;
+    public String getRecordDescription()
+    {
+        return recordDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setRecordDescription(String recordDescription)
+    {
+        this.recordDescription = recordDescription;
     }
 }

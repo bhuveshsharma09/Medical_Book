@@ -13,32 +13,51 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalBook">
         <activity android:name=".HealthyFood"></activity>
         <activity android:name=".MedicalNews" />
-        <activity android:name=".NearByHospitals" />
-        <activity android:name=".SafeEntry" />
+        <activity android:name=".NearByHospitals"
+            android:label="Nearby Hospitals"/>
+        <activity android:name=".SafeEntry"
+            android:label="Safe Entery"/>
         <activity android:name=".EditRecord" />
         <activity android:name=".YogaDetailActivity" />
-        <activity android:name=".YogaInstructorActivity" />
-        <activity android:name=".DialyMedicalRecordActivity" />
+        <activity android:name=".YogaInstructorActivity"
+            android:label="Yoga Instructor"/>
+
         <activity android:name=".LoginActivity" />
-        <activity android:name=".RegistrationActivity" />
+        <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_key" />
 
-        <activity android:name=".ChooseLoginRegistrationActivity">
+        <activity android:name=".SelectLoginSignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+
+    <!--- adding code to make child and parent to ease the navigation-->
+        <activity android:name=".DialyMedicalRecordActivity"
+            android:label="Daily Medical Records"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
+
+
+
     </application>
 
 </manifest>

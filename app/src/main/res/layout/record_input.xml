@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_below="@id/dialog_record_title"
-        android:hint="Record Description" />
+        android:hint="How are you feeling today? Please add your body temperature." />
 
 
 </RelativeLayout>
