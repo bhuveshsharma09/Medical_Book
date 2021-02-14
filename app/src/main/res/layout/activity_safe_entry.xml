@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SafeEntry">
+    tools:context=".safeentryfeature.SafeEntry">
 
     <!-- github (2020) yuriy-budiyev retrieved from:
     https://github.com/yuriy-budiyev/code-scanner-->

@@ -1,4 +1,4 @@
-package com.bhuvesh.medicalbook;
+package com.bhuvesh.medicalbook.yogainstructorfeature;
 
 public class Yoga {
     /*This class holds data related Yoga

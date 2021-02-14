@@ -1,4 +1,4 @@
-package com.bhuvesh.medicalbook;
+package com.bhuvesh.medicalbook.yogainstructorfeature;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
+import com.bhuvesh.medicalbook.R;
 
 import java.util.Locale;
 

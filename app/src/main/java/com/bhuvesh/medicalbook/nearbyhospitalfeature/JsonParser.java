@@ -1,4 +1,4 @@
-package com.bhuvesh.medicalbook;
+package com.bhuvesh.medicalbook.nearbyhospitalfeature;
 
 import org.json.JSONArray;
 import org.json.JSONException;

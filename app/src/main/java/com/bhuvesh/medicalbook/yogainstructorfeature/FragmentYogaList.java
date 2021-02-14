@@ -1,4 +1,4 @@
-package com.bhuvesh.medicalbook;
+package com.bhuvesh.medicalbook.yogainstructorfeature;
 
 import android.app.Activity;
 import android.os.Bundle;

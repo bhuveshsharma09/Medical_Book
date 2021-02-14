@@ -1,4 +1,4 @@
-package com.bhuvesh.medicalbook;
+package com.bhuvesh.medicalbook.medicalrecordfeature;
 
 import android.content.ContentValues;
 import android.content.Context;

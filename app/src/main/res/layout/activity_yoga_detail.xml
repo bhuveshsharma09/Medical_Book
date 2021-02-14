@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".YogaDetailActivity">
+    tools:context=".yogainstructorfeature.YogaDetailActivity">
 
     <fragment
         android:id="@+id/fragment_yoga_detail"
-        android:name="com.bhuvesh.medicalbook.FragmentYogaDetail"
+        android:name="com.bhuvesh.medicalbook.yogainstructorfeature.FragmentYogaDetail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"

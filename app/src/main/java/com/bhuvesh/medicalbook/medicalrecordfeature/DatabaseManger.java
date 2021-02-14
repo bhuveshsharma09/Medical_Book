@@ -1,4 +1,4 @@
-package com.bhuvesh.medicalbook;
+package com.bhuvesh.medicalbook.medicalrecordfeature;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

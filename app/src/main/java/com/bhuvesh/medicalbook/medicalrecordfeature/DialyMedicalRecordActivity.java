@@ -1,4 +1,4 @@
-package com.bhuvesh.medicalbook;
+package com.bhuvesh.medicalbook.medicalrecordfeature;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +22,9 @@ import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bhuvesh.medicalbook.MainActivity;
+import com.bhuvesh.medicalbook.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

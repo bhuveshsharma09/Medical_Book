@@ -16,15 +16,13 @@
         android:roundIcon="@mipmap/ic_app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalBook">
-        <activity android:name=".HealthyFood"></activity>
-        <activity android:name=".MedicalNews" />
-        <activity android:name=".NearByHospitals"
+        <activity android:name=".nearbyhospitalfeature.NearByHospitals"
             android:label="Nearby Hospitals"/>
-        <activity android:name=".SafeEntry"
+        <activity android:name=".safeentryfeature.SafeEntry"
             android:label="Safe Entery"/>
-        <activity android:name=".EditRecord" />
-        <activity android:name=".YogaDetailActivity" />
-        <activity android:name=".YogaInstructorActivity"
+        <activity android:name=".medicalrecordfeature.EditRecord" />
+        <activity android:name=".yogainstructorfeature.YogaDetailActivity" />
+        <activity android:name=".yogainstructorfeature.YogaInstructorActivity"
             android:label="Yoga Instructor"/>
 
         <activity android:name=".LoginActivity" />
@@ -47,7 +45,7 @@
 
 
     <!--- adding code to make child and parent to ease the navigation-->
-        <activity android:name=".DialyMedicalRecordActivity"
+        <activity android:name=".medicalrecordfeature.DialyMedicalRecordActivity"
             android:label="Daily Medical Records"
             android:parentActivityName=".MainActivity">
             <meta-data

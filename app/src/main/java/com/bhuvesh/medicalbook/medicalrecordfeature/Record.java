@@ -1,4 +1,4 @@
-package com.bhuvesh.medicalbook;
+package com.bhuvesh.medicalbook.medicalrecordfeature;
 
 public class Record {
     /*Record class contains data related to medical records.

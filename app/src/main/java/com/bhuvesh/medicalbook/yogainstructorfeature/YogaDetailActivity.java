@@ -1,4 +1,4 @@
-package com.bhuvesh.medicalbook;
+package com.bhuvesh.medicalbook.yogainstructorfeature;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,9 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bhuvesh.medicalbook.MainActivity;
+import com.bhuvesh.medicalbook.R;
 
 public class YogaDetailActivity extends AppCompatActivity {
     /*
