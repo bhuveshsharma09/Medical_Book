@@ -14,12 +14,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.bhuvesh.medicalbook.medicalrecordfeature.DialyMedicalRecordActivity;
+import com.bhuvesh.medicalbook.nearbyhospitalfeature.NearByHospitals;
+import com.bhuvesh.medicalbook.safeentryfeature.SafeEntry;
+import com.bhuvesh.medicalbook.yogainstructorfeature.YogaInstructorActivity;
 
 import java.util.Objects;
 
@@ -32,7 +40,14 @@ public class MainActivity extends AppCompatActivity  {
     * */
 
     // Initialise all the variables
-    Button dailyMedicalRecord, yogaInstructor, safeEntry;
+    Button  yogaInstructor, safeEntry;
+    Button dailyMedicalRecord;
+    TextView temperatureValue, humidityValue;
+    Weather weather;
+    String weatherData;
+
+
+
 
     // initialise sensor - accelerometer
     // initialise variables for shake detection
@@ -70,13 +85,45 @@ public class MainActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
+        getSupportActionBar().hide(); // hide the title bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
+
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+/*
+        try {
+
+            weatherData = weather.execute("http://api.openweathermap.org/data/2.5/weather?q=Singapore&appid="
+                    + getResources().getString(R.string.weather_api)).get();
+            Log.d("dattt", weatherData);
+
+
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+
+
+
+
+
 
         // connect the objects to the correct view elements
         dailyMedicalRecord = (Button) findViewById(R.id.button_daily_record);
         yogaInstructor = (Button) findViewById(R.id.button_yoga_instructor);
         safeEntry = (Button) findViewById(R.id.button_safe_entry);
+
+        temperatureValue = (TextView) findViewById(R.id.temperature_value);
+        humidityValue = (TextView) findViewById(R.id.humidity_value);
 
         // start sensor service to get values from accelerometer.
         // accelerometer is a sensor used to detect the shake on mobile device.
@@ -134,7 +181,7 @@ public class MainActivity extends AppCompatActivity  {
                 requestPermissions(new String[] {Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
             }else {
                 //start scanning
-                startActivityForResult(new Intent(MainActivity.this,SafeEntry.class), REQUEST_CODE_SCANNING);
+                startActivityForResult(new Intent(MainActivity.this, SafeEntry.class), REQUEST_CODE_SCANNING);
             }
         }else {
             //start scanning
@@ -188,11 +235,7 @@ public class MainActivity extends AppCompatActivity  {
         startActivity(intent);
     }
 
-    // TODO: delete the function
-    public void launchFood(View view) {
-        Intent intent = new Intent(this, HealthyFood.class);
-        startActivity(intent);
-    }
+
 
     @Override
     protected void onResume() {

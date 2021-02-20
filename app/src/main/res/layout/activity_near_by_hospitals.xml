@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".NearByHospitals">
+    tools:context=".nearbyhospitalfeature.NearByHospitals">
 
 
 
@@ -24,20 +24,18 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
 
-
-
-
-
-
         <Button
             android:id="@+id/button_get_nearby_hospitals"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FIND"
-            android:textSize="18dp"
-            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/margin_bottom"
-            />
+            android:text="Nearby Hospitals"
+            android:layout_gravity="right"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:background="@drawable/find_map_button"
+            android:layout_marginRight="@dimen/margin_right"
+
+            android:textSize="13dp" />
 
 
 

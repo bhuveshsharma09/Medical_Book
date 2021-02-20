@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FragmentTimer">
+    tools:context=".yogainstructorfeature.FragmentTimer">
 
 <TextView
 android:id="@+id/time_display"
@@ -24,36 +24,40 @@ android:textSize="80sp"
         android:orientation="horizontal"
         android:layout_gravity="center"
         android:layout_height="wrap_content">
-<Button
-android:id="@+id/start_button"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-    android:background="@drawable/timer_start"
-android:layout_gravity="center_horizontal"
 
-    android:layout_marginRight="@dimen/margin_left"
-android:layout_marginTop="20dp"
-android:text="@string/button_timer_start"
-    />
-<Button
+        <ImageButton
+            android:id="@+id/start_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="@dimen/margin_left"
+
+            android:background="@drawable/timer_start"
+            android:src="@drawable/play_timer"
+            android:text="@string/button_timer_start" />
+
+<ImageButton
 android:id="@+id/stop_button"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
+android:layout_width="60dp"
+android:layout_height="60dp"
 android:layout_gravity="center_horizontal"
     android:background="@drawable/timer_start"
 android:layout_marginTop="8dp"
+    android:src="@drawable/stop_timer"
     android:layout_marginRight="@dimen/margin_left"
 android:text="@string/button_timer_stop"
     />
-<Button
-android:id="@+id/reset_button"
-android:layout_width="wrap_content"
-android:layout_height="wrap_content"
-android:layout_gravity="center_horizontal"
-    android:background="@drawable/timer_start"
-android:layout_marginTop="8dp"
-android:text="@string/button_timer_reset"
-    />
+
+        <ImageButton
+            android:id="@+id/reset_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/timer_start"
+            android:src="@drawable/reset_timer"
+            android:text="@string/button_timer_reset" />
 
 
 </LinearLayout>

@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/custom"
-    tools:context=".EditRecord">
+    android:background="@color/theme_blue"
+    tools:context=".medicalrecordfeature.EditRecord">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -14,7 +14,7 @@
         android:layout_marginHorizontal="@dimen/margin_top"
         android:elevation="@dimen/element_elevation"
         android:transitionName="animation"
-        app:cardBackgroundColor="@color/purple_200"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="@dimen/record_holder_radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,6 +32,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="TITLE"
+                android:layout_marginRight="@dimen/margin_right"
+                android:layout_marginLeft="@dimen/margin_left"
+                android:layout_marginTop="@dimen/margin_top"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +53,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginRight="@dimen/margin_right"
+                android:layout_marginLeft="@dimen/margin_left"
                 app:layout_constraintTop_toBottomOf="@+id/edit_record_title"
                 app:layout_constraintVertical_bias="0.107" />
 
@@ -62,6 +67,7 @@
                 android:layout_marginEnd="72dp"
                 android:layout_marginBottom="40dp"
                 android:text="CANCEL"
+                android:background="@drawable/share_button_background"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -72,6 +78,7 @@
                 android:layout_alignBottom="@id/edit_record_des"
 
                 android:layout_gravity="bottom"
+                android:background="@drawable/share_button_background"
                 android:layout_marginStart="76dp"
                 android:layout_marginBottom="40dp"
                 android:text="SAVE"

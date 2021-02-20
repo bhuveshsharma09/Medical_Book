@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Medical Book</string>
-    <string name="button_daily_record">Daily Medical Record</string>
-    <string name="button_yoga_instructor">Personal Yoga Instructor</string>
-    <string name="button_nearest_hospital">Nearest hospital</string>
+    <string name="button_daily_record">Daily Records</string>
+    <string name="button_yoga_instructor">Yoga Guide</string>
+    <string name="button_nearest_hospital">Find hospital</string>
     <string name="button_bus_service">Bus to go to hospital</string>
     <string name="button_food">Healthy Food Options</string>
     <string name="button_safe_entry">Safe Entry</string>
@@ -14,6 +14,10 @@
     <string name="google_map_key">AIzaSyB91i6CosaSnE3AQWq-GLt109oDMLyzvPE</string>
     <string name="button_food_roder">Order</string>
     <string name="action_bar_logout">Logout</string>
+    <string name="temperature">Temperature:</string>
+    <string name="humudity">Humidity:</string>
+    <string name="suggestion">Suggestion:</string>
+    <string name="weather_api">ea8c831f09add5a2a16800c7ec03b7e1</string>
 
 
 </resources>

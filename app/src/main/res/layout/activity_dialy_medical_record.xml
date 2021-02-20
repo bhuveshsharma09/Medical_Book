@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_gradient"
-    tools:context=".DialyMedicalRecordActivity">
+    android:background="@color/grey"
+    tools:context=".medicalrecordfeature.DialyMedicalRecordActivity">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -19,16 +19,31 @@
 
     <ImageButton
         android:id="@+id/image_add_record"
-        android:layout_width="@dimen/button_add_height"
-        android:layout_height="@dimen/button_add_width"
+        android:layout_width="63dp"
+        android:layout_height="64dp"
         android:layout_marginEnd="33dp"
         android:layout_marginBottom="41dp"
         android:background="@drawable/add_record_button_shape"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="launch_record_input"
         android:elevation="@dimen/element_elevation"
-        android:src="@drawable/ic_add_record"/>
 
+        android:onClick="launch_record_input"
+        android:src="@drawable/ic_add_record"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <ImageButton
+        android:id="@+id/send_record"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/share_button_background"
+        android:elevation="@dimen/element_elevation"
+
+        android:onClick="launch_send_record"
+        android:src="@drawable/share_clipart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
