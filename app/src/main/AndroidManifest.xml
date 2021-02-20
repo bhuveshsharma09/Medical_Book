@@ -16,15 +16,18 @@
         android:roundIcon="@mipmap/ic_app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MedicalBook">
-        <activity android:name=".nearbyhospitalfeature.NearByHospitals"
-            android:label="Nearby Hospitals"/>
-        <activity android:name=".safeentryfeature.SafeEntry"
-            android:label="Safe Entery"/>
+
+        <activity
+            android:name=".nearbyhospitalfeature.NearByHospitals"
+            android:label="Nearby Hospitals" />
+        <activity
+            android:name=".safeentryfeature.SafeEntry"
+            android:label="Safe Entery" />
         <activity android:name=".medicalrecordfeature.EditRecord" />
         <activity android:name=".yogainstructorfeature.YogaDetailActivity" />
-        <activity android:name=".yogainstructorfeature.YogaInstructorActivity"
-            android:label="Yoga Instructor"/>
-
+        <activity
+            android:name=".yogainstructorfeature.YogaInstructorActivity"
+            android:label="Yoga Instructor" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".MainActivity" />
@@ -36,34 +39,31 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".SelectLoginSignUpActivity">
+        <activity android:name=".SelectLoginSignUpActivity"/>
+            <activity android:name=".SplashScreen">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-
-
-
-    <!--- adding code to make child and parent to ease the navigation-->
-        <activity android:name=".medicalrecordfeature.DialyMedicalRecordActivity"
+            </activity>
+        <!-- - adding code to make child and parent to ease the navigation -->
+        <activity
+            android:name=".medicalrecordfeature.DialyMedicalRecordActivity"
             android:label="Daily Medical Records"
             android:parentActivityName=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.SEND"/>
-                <data android:mimeType="text/plain"/>
+                <action android:name="android.intent.action.SEND" />
 
+                <data android:mimeType="text/plain" />
             </intent-filter>
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".MainActivity" />
         </activity>
-
-
-
-
     </application>
 
 </manifest>
