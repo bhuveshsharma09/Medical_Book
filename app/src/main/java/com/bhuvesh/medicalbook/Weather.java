@@ -1,12 +1,14 @@
 package com.bhuvesh.medicalbook;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
-import java.io.IOException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Weather extends AsyncTask<String, Void, String> {
@@ -16,44 +18,48 @@ public class Weather extends AsyncTask<String, Void, String> {
     @Override
     protected String doInBackground(String... strings) {
 
+        StringBuilder resultStringBuilder = new StringBuilder();
+
         try {
-            URL url = new URL(strings[0]);
-            HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                String result = "";
+                URL url = new URL(strings[0]);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.connect();
+                InputStream inputStream = httpURLConnection.getInputStream();
 
-            httpURLConnection.connect();
+                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                 while ((result = bufferedReader.readLine()) != null)
+            {
+                resultStringBuilder.append(result).append("\n");
+            }
 
-            InputStream inputStream = httpURLConnection.getInputStream();
-            InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 
-            int rawData = inputStream.read();
-            String tempString = "";
+            JSONObject jsonObject = new JSONObject(resultStringBuilder.toString());
+            //String weatherDetailsTemp = jsonObject.getString("temp");
 
-           char tempChar;
-
-           while(rawData!= -1)
-           {
-               tempChar = (char) rawData;
-               tempString = tempString + tempChar;
-               rawData = inputStream.read();
-           }
-           return tempString;
+            JSONObject newJsonObject = jsonObject.getJSONObject("main");
+           String weatherDetailsTemp = newJsonObject.getString("temp");
 
 
 
 
+            String weatherDetailsHum = newJsonObject.getString("humidity");
+            weatherDetailsTemp = weatherDetailsTemp + " C S"+weatherDetailsHum;
+
+
+            Log.d("data ji",resultStringBuilder.toString());
+            return weatherDetailsTemp;
 
 
 
 
-
-
-        } catch (MalformedURLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+            return null;
         }
-
-
-        return null;
     }
+
+
 }
+

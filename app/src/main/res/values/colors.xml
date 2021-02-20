@@ -10,8 +10,14 @@
     <color name="custom">#237BFF</color>
     <color name="grey">#FBFBFB</color>
     <color name="theme_blue">#4472C4</color>
+    <color name="theme_blue_light">#BF4472C4</color>
     <color name="theme_red">#FF9696</color>
     <color name="theme_green">#00B050</color>
+    <color name="theme_green_light">#BF00B050</color>
+    <color name="theme_purple_light">#4ADCD9D9</color>
+    <color name="theme_red_light">#92FF9696</color>
+
+
 
 
 </resources>

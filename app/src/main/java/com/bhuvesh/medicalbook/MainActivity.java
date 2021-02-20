@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ import com.bhuvesh.medicalbook.safeentryfeature.SafeEntry;
 import com.bhuvesh.medicalbook.yogainstructorfeature.YogaInstructorActivity;
 
 import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity  {
     /*
@@ -97,24 +100,71 @@ public class MainActivity extends AppCompatActivity  {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-/*
+        temperatureValue = (TextView) findViewById(R.id.temperature_value);
+        humidityValue = (TextView) findViewById(R.id.humidity_value);
+        TextView suggestion = (TextView) findViewById(R.id.suggestion);
+        ImageView weatherImage = (ImageView) findViewById(R.id.weather_image);
         try {
+            Toast.makeText(MainActivity.this, "Getting weather details", Toast.LENGTH_LONG).show();
 
-            weatherData = weather.execute("http://api.openweathermap.org/data/2.5/weather?q=Singapore&appid="
-                    + getResources().getString(R.string.weather_api)).get();
-            Log.d("dattt", weatherData);
+            String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Singapore&units=metric&appid="
+                    + getResources().getString(R.string.weather_api);
+           // Log.d("dattt", weatherData);
+
+            Weather weather = new Weather();
+            try {
+                String weatherInfo = "";
+                weatherInfo = weather.execute(apiUrl).get();
+
+                // slice the string to get temp and humidity
+
+                String[] values = weatherInfo.split("S");
+                String tempValue = values[0];
+                String humValue = values[1];
 
 
 
-        } catch (ExecutionException e) {
+                temperatureValue.setText(String.valueOf(tempValue));
+                humidityValue.setText(String.valueOf(humValue));
+
+                String[] newValues = weatherInfo.split("C");
+                float tempfloatValue=Float.parseFloat(newValues[0]);
+
+               // tempfloatValue = (float) 55.0;
+
+                if (tempfloatValue >= 32.0 )
+                {
+                    suggestion.setText("Avoid going out in hot weather!");
+                    weatherImage.setBackgroundResource(R.drawable.very_hot);
+
+                }
+                else{
+                    if ((tempfloatValue > 18 ) && (tempfloatValue < 32))
+                    {
+                    suggestion.setText("Such a sunny day to have a walk!");
+                        weatherImage.setBackgroundResource(R.drawable.sunny);}
+                    else {
+                        suggestion.setText("Have a good day!");
+                        weatherImage.setBackgroundResource(R.drawable.sunny);
+
+                    }
+
+                }
+
+
+
+
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+
+        } catch (Resources.NotFoundException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
-
-
-
+        }
 
 
         // connect the objects to the correct view elements
@@ -122,8 +172,7 @@ public class MainActivity extends AppCompatActivity  {
         yogaInstructor = (Button) findViewById(R.id.button_yoga_instructor);
         safeEntry = (Button) findViewById(R.id.button_safe_entry);
 
-        temperatureValue = (TextView) findViewById(R.id.temperature_value);
-        humidityValue = (TextView) findViewById(R.id.humidity_value);
+
 
         // start sensor service to get values from accelerometer.
         // accelerometer is a sensor used to detect the shake on mobile device.

@@ -21,7 +21,7 @@
 
         android:layout_marginTop="29dp"
         android:fontFamily="monospace"
-        android:text="Health Book"
+        android:text="Medical Book"
         android:textColor="@color/black"
         android:textSize="24dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView"
@@ -227,6 +227,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_parent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
@@ -242,56 +243,56 @@
                         android:id="@+id/temperature"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_top"
-                        android:layout_marginBottom="5dp"
                         android:layout_marginLeft="@dimen/margin_left"
-                        android:layout_marginRight="@dimen/margin_right"
-                        android:textSize="20dp"
+                        android:layout_marginTop="@dimen/margin_top"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="@string/temperature"
                         android:textColor="@color/black"
 
-                        android:text="@string/temperature" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/temperature_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_top"
-                        android:layout_marginBottom="5dp"
-
                         android:layout_marginRight="@dimen/margin_right"
-                        android:textSize="20dp"
-                        android:textColor="@color/custom"
-                        android:layout_toRightOf="@id/temperature"
 
-                        android:text="@string/temperature" />
+                        android:layout_marginBottom="5dp"
+                        android:layout_toRightOf="@id/temperature"
+                        android:text="@string/temperature"
+                        android:textColor="@color/custom"
+
+                        android:textSize="14sp" />
 
 
                     <TextView
                         android:id="@+id/humidity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_left"
-                        android:layout_marginRight="@dimen/margin_right"
-                        android:textSize="20dp"
-                        android:textColor="@color/black"
                         android:layout_below="@id/temperature"
+                        android:layout_marginLeft="@dimen/margin_left"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/humudity"
+                        android:textColor="@color/black"
 
-                        android:text="@string/humudity" />
+                        android:textSize="14sp" />
 
 
                     <TextView
                         android:id="@+id/humidity_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="5dp"
+                        android:layout_below="@id/temperature"
 
                         android:layout_marginRight="@dimen/margin_right"
-                        android:textSize="20dp"
-                        android:textColor="@color/custom"
-                        android:layout_below="@id/temperature"
+                        android:layout_marginBottom="5dp"
                         android:layout_toRightOf="@id/humidity"
+                        android:text="@string/temperature"
+                        android:textColor="@color/custom"
 
-                        android:text="@string/temperature" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/suggestion"
@@ -300,7 +301,7 @@
                         android:layout_below="@id/humidity"
                         android:layout_centerHorizontal="true"
                         android:layout_marginLeft="@dimen/margin_left"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginRight="@dimen/margin_right"
                         android:layout_marginBottom="@dimen/margin_bottom"
 
@@ -308,7 +309,20 @@
 
                         android:text="@string/suggestion"
                         android:textColor="@color/black"
-                        android:textSize="20dp" />
+                        android:textSize="14sp" />
+
+                    <ImageView
+                        android:id="@+id/weather_image"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="55dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="@dimen/margin_right"
+
+
+                        tools:srcCompat="@tools:sample/avatars" />
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
