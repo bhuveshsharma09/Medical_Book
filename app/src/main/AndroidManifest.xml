@@ -48,6 +48,11 @@
         <activity android:name=".medicalrecordfeature.DialyMedicalRecordActivity"
             android:label="Daily Medical Records"
             android:parentActivityName=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <data android:mimeType="text/plain"/>
+
+            </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>

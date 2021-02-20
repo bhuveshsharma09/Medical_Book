@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".yogainstructorfeature.FragmentYogaDetail"
-    android:orientation="vertical">
+    >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/yoga_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top"
-        android:layout_marginLeft="@dimen/margin_left"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:text="@string/hello_blank_fragment" />
-    <TextView
-        android:id="@+id/yoga_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_left"
-        android:text="@string/hello_blank_fragment" />
-    
+        <TextView
+            android:id="@+id/yoga_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/hello_blank_fragment"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#F100B050" />
+
+        <TextView
+            android:id="@+id/yoga_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_left"
+
+            android:layout_marginBottom="5dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/hello_blank_fragment"
+            android:textColor="#000000" />
 
 
+        <ImageView
+            android:id="@+id/yoga_image"
 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:adjustViewBounds="true"
+            tools:src="@tools:sample/avatars" />
 
-
-    <FrameLayout
+        <FrameLayout
         android:id="@+id/timer_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,5 +55,7 @@
         android:layout_marginLeft="@dimen/margin_left"
         android:layout_marginRight="@dimen/margin_right"
         android:layout_marginBottom="@dimen/margin_bottom"/>
+    </LinearLayout>
 
-</LinearLayout>
+
+</ScrollView>

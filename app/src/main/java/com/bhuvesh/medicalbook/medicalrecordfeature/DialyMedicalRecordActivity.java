@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -69,6 +71,14 @@ public class DialyMedicalRecordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE); //will hide the title
+        getSupportActionBar().hide(); // hide the title bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialy_medical_record);
         ActionBar actionBar = getSupportActionBar();
@@ -198,5 +208,17 @@ public class DialyMedicalRecordActivity extends AppCompatActivity {
         if (requestCode == 1) {
             addRecords();
         }
+    }
+
+    public void launch_send_record(View view) {
+
+        RecordHandler recordHandler = new RecordHandler(this);
+        String allRecord = recordHandler.readFromRecordsString();
+        String recordText = String.valueOf(allRecord);
+
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT,recordText);
+        startActivity(intent);
     }
 }

@@ -5,7 +5,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -45,11 +45,11 @@ public class FragmentTimer extends Fragment implements View.OnClickListener {
         startTimer(view);
 
         // link all the variables with correct element
-        Button startButton = (Button)view.findViewById(R.id.start_button);
+        ImageButton startButton = (ImageButton)view.findViewById(R.id.start_button);
         startButton.setOnClickListener(this);
-        Button stopButton = (Button)view.findViewById(R.id.stop_button);
+        ImageButton stopButton = (ImageButton)view.findViewById(R.id.stop_button);
         stopButton.setOnClickListener(this);
-        Button resetButton = (Button)view.findViewById(R.id.reset_button);
+        ImageButton resetButton = (ImageButton)view.findViewById(R.id.reset_button);
         resetButton.setOnClickListener(this);
         return view;
     }

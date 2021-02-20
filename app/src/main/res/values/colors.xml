@@ -8,6 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="custom">#237BFF</color>
+    <color name="grey">#FBFBFB</color>
+    <color name="theme_blue">#4472C4</color>
+    <color name="theme_red">#FF9696</color>
+    <color name="theme_green">#00B050</color>
 
 
 </resources>

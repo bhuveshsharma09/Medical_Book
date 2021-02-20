@@ -23,7 +23,7 @@ public class FragmentYogaList extends ListFragment {
 
 
     static interface YogaListListener {
-        // this interface lets the other activit (the one implements it)
+        // this interface lets the other activity (the one implements it)
         //to get the id of item clicked in the list
         void itemClicked(long id);
     };
@@ -40,6 +40,7 @@ public class FragmentYogaList extends ListFragment {
         String[] names = new String[Yoga.yogas.length];
         for (int i = 0; i < names.length; i++) {
             names[i] = Yoga.yogas[i].getYogaName();
+
         }
 
         // set the array to list adapter

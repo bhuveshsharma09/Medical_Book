@@ -4,23 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    
     tools:context=".LoginActivity"
     android:orientation="vertical">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:background="@drawable/login_screen_back">
+
+        <ImageView
+            android:layout_width="77dp"
+
+            android:layout_height="77dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="90dp"
+            android:src="@drawable/cycle"/>
+
+
+
+
+
+    </FrameLayout>
+
 
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="email"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
         android:id="@+id/email"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="password"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
         android:id="@+id/password"/>
 
     <Button
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginLeft="120dp"
+        android:layout_marginRight="120dp"
+        android:background="@drawable/find_map_button"
         android:layout_height="wrap_content"
         android:text="Login"
         android:id="@+id/login"/>

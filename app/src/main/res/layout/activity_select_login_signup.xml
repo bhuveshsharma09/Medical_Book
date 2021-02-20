@@ -10,26 +10,13 @@
     tools:context=".SelectLoginSignUpActivity">
 
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
 
-
-
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:src="@drawable/background_first_screen"
-            android:elevation="100dp"/>
-
-
-
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_weight="3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -37,33 +24,80 @@
             android:gravity="center"
             >
 
-        <Button
-            android:id="@+id/signup"
+            <Button
+                android:id="@+id/signup"
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/signup_button"
+                android:layout_width="147dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="63dp"
 
-            android:text="Sign Up"
+                android:layout_marginBottom="120dp"
 
+
+                android:background="@drawable/signup_button"
+                android:text="Sign Up"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/login"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/subheading_main2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="141dp"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:text="Record your journey!"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_name_main2" />
+
+            <TextView
+                android:id="@+id/title_name_main2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="124dp"
+
+                android:layout_marginTop="272dp"
+                android:fontFamily="monospace"
+                android:gravity="center_horizontal|center_vertical"
+                android:text="Health Book"
+                android:textColor="@color/black"
+                android:textSize="24dp"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/login"
+                android:layout_width="130dp"
+
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="65dp"
+                android:layout_marginBottom="120dp"
+
+                android:layout_toRightOf="@id/signup"
+                android:background="@drawable/login_button"
+                android:text="Login"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/signup" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="209dp"
+                android:layout_height="201dp"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="56dp"
+                android:layout_marginEnd="100dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/new_cycle_logo" />
 
 
             />
-
-        <Button
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-
-            android:background="@drawable/login_button"
-            android:text="Login"
-            android:layout_toRightOf="@id/signup"
-
-            android:layout_height="wrap_content" />
-
-
-
-            />
-        </RelativeLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

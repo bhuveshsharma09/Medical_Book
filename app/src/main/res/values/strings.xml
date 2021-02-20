@@ -17,6 +17,7 @@
     <string name="temperature">Temperature:</string>
     <string name="humudity">Humidity:</string>
     <string name="suggestion">Suggestion:</string>
+    <string name="weather_api">ea8c831f09add5a2a16800c7ec03b7e1</string>
 
 
 </resources>

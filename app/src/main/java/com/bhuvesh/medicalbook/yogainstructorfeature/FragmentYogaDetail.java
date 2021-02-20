@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,11 +55,14 @@ public class FragmentYogaDetail extends Fragment {
         if(view != null){
             TextView yogaName = (TextView) view.findViewById(R.id.yoga_name);
             TextView yogaDetail = (TextView) view.findViewById(R.id.yoga_detail);
+            ImageView yogaImage = (ImageView) view.findViewById(R.id.yoga_image);
+
 
             Yoga yoga = Yoga.yogas[(int) yogaId];
 
             yogaName.setText(yoga.getYogaName());
             yogaDetail.setText(yoga.getYogaDetail());
+            yogaImage.setBackgroundResource(yoga.getImageId());
         }
     }
 

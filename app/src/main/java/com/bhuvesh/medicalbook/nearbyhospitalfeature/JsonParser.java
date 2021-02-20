@@ -15,7 +15,7 @@ public class JsonParser {
     * which can then be displayed on google maps
     * */
 
-    private HashMap<String,String> parseJsonObject(JSONObject jsonObject)
+    public HashMap<String,String> parseJsonObject(JSONObject jsonObject)
     {
         HashMap<String,String> dataList = new HashMap<>();
 
@@ -39,7 +39,7 @@ public class JsonParser {
     }
 
 
-    private List<HashMap<String,String>> parseJsonArray(JSONArray jsonArray)
+    public List<HashMap<String,String>> parseJsonArray(JSONArray jsonArray)
     {
         List<HashMap<String,String>> dataList = new ArrayList<>();
         for (int i = 0; i<jsonArray.length();i++)

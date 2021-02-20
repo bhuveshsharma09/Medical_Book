@@ -57,6 +57,45 @@ public class RecordHandler extends DatabaseManger {
         return records;
     }
 
+
+    public String readFromRecordsString() {
+        // this function is to read all the records from SQLite database
+        // these records can be displayed in recyclyer view by DailyMedicalRecord activity
+        String recordString = "";
+        String SQLQuery = "SELECT * FROM Record ORDER BY id ASC";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(SQLQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id")));
+                String title = cursor.getString(cursor.getColumnIndex("title"));
+                String description = cursor.getString(cursor.getColumnIndex("description"));
+                recordString = recordString +" "+  title +" "+  description + "\n"+ "\n";
+                Record record = new Record(title, description);
+                record.setId(id);
+                // add record in the records array
+
+            } while (cursor.moveToNext());
+
+            cursor.close();
+            db.close();
+        }
+        return recordString;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     public Record readOneRecord(int id) {
         // this function is to read a particular record
         // based on ID

@@ -43,6 +43,11 @@ public class MainActivity extends AppCompatActivity  {
     Button  yogaInstructor, safeEntry;
     Button dailyMedicalRecord;
     TextView temperatureValue, humidityValue;
+    Weather weather;
+    String weatherData;
+
+
+
 
     // initialise sensor - accelerometer
     // initialise variables for shake detection
@@ -92,6 +97,20 @@ public class MainActivity extends AppCompatActivity  {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+/*
+        try {
+
+            weatherData = weather.execute("http://api.openweathermap.org/data/2.5/weather?q=Singapore&appid="
+                    + getResources().getString(R.string.weather_api)).get();
+            Log.d("dattt", weatherData);
+
+
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
 
 
 

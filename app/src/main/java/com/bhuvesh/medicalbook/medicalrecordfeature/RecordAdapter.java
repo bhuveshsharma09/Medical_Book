@@ -51,7 +51,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
         if (position == lastSelectedPosition){
             holder.recordTitle.setTextColor(Color.parseColor("#000000"));
         }else {
-            holder.recordTitle.setTextColor(Color.parseColor("#FFFFFF"));
+            holder.recordTitle.setTextColor(Color.parseColor("#4472C4"));
         }
         holder.recordTitle.setText(records.get(position).getRecordTitle());
         holder.recordDescription.setText(records.get(position).getRecordDescription());
