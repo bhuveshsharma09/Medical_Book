@@ -3,7 +3,7 @@ package com.bhuvesh.medicalbook.yogainstructorfeature;
 import junit.framework.TestCase;
 
 public class YogaTest extends TestCase {
-    Yoga yoga = new Yoga("Yoga_test", "Yoga_test_details");
+    Yoga yoga = new Yoga("Yoga_test", "Yoga_test_details",  1);
     public void testGetYogaName() {
         assertEquals("Yoga_test",yoga.getYogaName());
     }
@@ -16,7 +16,8 @@ public class YogaTest extends TestCase {
         assertEquals("Yoga{"+
                 "yogaName='" + yoga.getYogaName() + '\'' +
                 '}',yoga.toString());
-
-
+    }
+    public void testGetImageId() {
+        assertEquals(1,yoga.getImageId());
     }
 }

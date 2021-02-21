@@ -13,16 +13,11 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
-
-
     // defined animation variables
     Animation logoAnimation, nameAnimation, bottomTextAnimation;
-
     View firstImage, secondImage, thirdImage, fourthImage;
     TextView appName, devName;
-
     static int TIMEOUT = 5000;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

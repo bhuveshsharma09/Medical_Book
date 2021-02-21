@@ -34,7 +34,7 @@ import java.util.Date;
 
 public class DialyMedicalRecordActivity extends AppCompatActivity {
     /*
-    * This activity provides user with ioption to
+    * This activity provides user with option to
     * create daily notes related to their health.
     * user can add their body temperature etc.
     * */

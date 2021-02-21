@@ -22,7 +22,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordHold
     ArrayList<Record> records;
     Context context;
     static ItemClicked itemClicked;
-    //TODO chnage
+
     ViewGroup parent;
     private int lastSelectedPosition = -1;
 

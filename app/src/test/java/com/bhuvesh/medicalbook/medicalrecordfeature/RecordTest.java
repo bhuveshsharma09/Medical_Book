@@ -5,26 +5,16 @@ import junit.framework.TestCase;
 
 public class RecordTest extends TestCase {
     Record record = new Record("Record Title","Record Description");
-
     int recordId;
-
-
     public void testSetId() {
         record.setId(1);
         assertEquals(1,record.getId());
-
-
-
     }
 
     public void testGetId() {
         record.setId(1);
         assertEquals(1,record.getId());
-
-
     }
-
-
 
     public void testGetRecordTitle() {
         assertEquals("Record Title",record.getRecordTitle());

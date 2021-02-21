@@ -23,8 +23,7 @@ public class Record {
     }
 
     // getter and setter methods to interact with Record class
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 

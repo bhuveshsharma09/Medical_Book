@@ -15,10 +15,10 @@ import com.bhuvesh.medicalbook.R;
 
 public class EditRecord extends AppCompatActivity {
     /*
-    * This activity is called when, the user clicks on
-    * edit clip art on record holder.
-    * here user can see the record and edit it.
-    * after editing user can either save the record or cancel the chnages.*/
+     * This activity is called when, the user clicks on
+     * edit clip art on record holder.
+     * here user can see the record and edit it.
+     * after editing user can either save the record or cancel the chnages.*/
 
     // declare all the variables
     EditText editRecordTitle, editRecordDes;
@@ -30,8 +30,6 @@ public class EditRecord extends AppCompatActivity {
         getSupportActionBar().hide(); // hide the title bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN); //enable full screen
-
-
 
 
         super.onCreate(savedInstanceState);
@@ -55,12 +53,12 @@ public class EditRecord extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // if user clicks save button, this code will work
-                Record record = new Record(editRecordDes.getText().toString(),editRecordTitle.getText().toString());
-                record.setId(intent.getIntExtra("id",1));
+                Record record = new Record(editRecordDes.getText().toString(), editRecordTitle.getText().toString());
+                record.setId(intent.getIntExtra("id", 1));
 
-                if (new RecordHandler(EditRecord.this).update(record)){
+                if (new RecordHandler(EditRecord.this).update(record)) {
                     Toast.makeText(EditRecord.this, "Note updated", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(EditRecord.this, "Failed updating", Toast.LENGTH_SHORT).show();
                 }
                 onBackPressed();

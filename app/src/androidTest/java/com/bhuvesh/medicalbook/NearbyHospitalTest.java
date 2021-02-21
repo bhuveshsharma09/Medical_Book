@@ -14,25 +14,28 @@ import androidx.test.runner.AndroidJUnit4;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SafeEntryTest {
+public class NearbyHospitalTest {
 
     @Rule
     public ActivityTestRule<SplashScreen> mActivityTestRule = new ActivityTestRule<>(SplashScreen.class);
@@ -40,10 +43,11 @@ public class SafeEntryTest {
     @Rule
     public GrantPermissionRule mGrantPermissionRule =
             GrantPermissionRule.grant(
-                    "android.permission.CAMERA");
+                    "android.permission.ACCESS_FINE_LOCATION");
+
 
     @Test
-    public void safeEntryTest() throws InterruptedException {
+    public void nearbyHospitalTest() throws InterruptedException {
         // add delay of 7sec as splash screen is 5 sec
         Thread.sleep(7000);
         ViewInteraction materialButton = onView(
@@ -98,8 +102,24 @@ public class SafeEntryTest {
         materialButton2.perform(click());
         Thread.sleep(2000);
 
+        ViewInteraction imageView = onView(
+                allOf(withId(R.id.imageView), withContentDescription("TODO"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        Thread.sleep(2000);
+        imageView.check(matches(isDisplayed()));
+        Thread.sleep(2000);
+
+        ViewInteraction imageView2 = onView(
+                allOf(withId(R.id.imageView), withContentDescription("TODO"),
+                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.ScrollView.class))),
+                        isDisplayed()));
+        Thread.sleep(2000);
+        imageView2.check(matches(isDisplayed()));
+        Thread.sleep(2000);
+
         ViewInteraction materialButton3 = onView(
-                allOf(withId(R.id.button_safe_entry), withText("Safe Entry"),
+                allOf(withId(R.id.button_nearby_hospitals), withText("Find hospital"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("androidx.cardview.widget.CardView")),
@@ -110,7 +130,60 @@ public class SafeEntryTest {
         materialButton3.perform(click());
         Thread.sleep(2000);
 
-        pressBack();
+        ViewInteraction materialButton4 = onView(
+                allOf(withId(R.id.button_get_nearby_hospitals), withText("Nearby Hospitals"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
+        Thread.sleep(2000);
+        materialButton4.perform(click());
+        Thread.sleep(2000);
+
+        ViewInteraction actionMenuItemView = onView(
+                allOf(withId(R.id.dashboard), withContentDescription("Home"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        Thread.sleep(2000);
+        actionMenuItemView.perform(click());
+        Thread.sleep(2000);
+
+        ViewInteraction materialButton5 = onView(
+                allOf(withId(R.id.button_nearby_hospitals), withText("Find hospital"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("androidx.cardview.widget.CardView")),
+                                        0),
+                                1),
+                        isDisplayed()));
+        Thread.sleep(2000);
+        materialButton5.perform(click());
+        Thread.sleep(2000);
+
+        ViewInteraction view = onView(
+                allOf(withContentDescription("Google Map"),
+                        withParent(withParent(withId(R.id.fragment_nearby_hospital))),
+                        isDisplayed()));
+        Thread.sleep(2000);
+        view.check(matches(isDisplayed()));
+        Thread.sleep(2000);
+
+        ViewInteraction actionMenuItemView2 = onView(
+                allOf(withId(R.id.dashboard), withContentDescription("Home"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        Thread.sleep(2000);
+        actionMenuItemView2.perform(click());
         Thread.sleep(2000);
     }
 

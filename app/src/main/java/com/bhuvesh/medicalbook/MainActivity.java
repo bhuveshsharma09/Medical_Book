@@ -35,7 +35,7 @@ import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity  {
-    /*
+    /**
     * This is the main activity and dashboard screen of the application.
     * this screen helps user to navigate to various services which the application has to offer.
     *
@@ -48,9 +48,6 @@ public class MainActivity extends AppCompatActivity  {
     TextView temperatureValue, humidityValue;
     Weather weather;
     String weatherData;
-
-
-
 
     // initialise sensor - accelerometer
     // initialise variables for shake detection
