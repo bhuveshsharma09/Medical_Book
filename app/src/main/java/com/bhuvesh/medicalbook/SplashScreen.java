@@ -29,9 +29,9 @@ public class SplashScreen extends AppCompatActivity {
 
         setContentView(R.layout.splash_screen);
 
-        logoAnimation = AnimationUtils.loadAnimation(this,R.anim.logo_animation);
-        nameAnimation = AnimationUtils.loadAnimation(this,R.anim.name_animation);
-        bottomTextAnimation = AnimationUtils.loadAnimation(this,R.anim.bottom_text_animation);
+        logoAnimation = AnimationUtils.loadAnimation(this, R.anim.logo_animation);
+        nameAnimation = AnimationUtils.loadAnimation(this, R.anim.name_animation);
+        bottomTextAnimation = AnimationUtils.loadAnimation(this, R.anim.bottom_text_animation);
 
         firstImage = findViewById(R.id.first_logo);
         secondImage = findViewById(R.id.second_logo);
@@ -53,18 +53,12 @@ public class SplashScreen extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this,SelectLoginSignUpActivity.class);
+                Intent intent = new Intent(SplashScreen.this, SelectLoginSignUpActivity.class);
                 startActivity(intent);
                 finish();
 
             }
-        },TIMEOUT);
-
-
-
-
-
-
+        }, TIMEOUT);
 
 
     }
